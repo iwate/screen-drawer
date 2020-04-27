@@ -92,7 +92,7 @@ jobs:
       run: |
         cd $GOPATH/src/github.com/${{ github.repository }}
         qtdeploy build desktop
-        cp ./deploy/darwin/screen-drawer.app ${{ github.workspace }}/screen-drawer.app
+        zip -r ./deploy/darwin ${{ github.workspace }}/screen-drawer-maxos.zip
         ls ${{ github.workspace }}
     
     - name: Upload Release Asset
@@ -101,6 +101,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ github.event.release.upload_url }}
-        asset_path: screen-drawer.app
-        asset_name: screen-drawer.app
+        asset_path: screen-drawer-maxos.zip
+        asset_name: screen-drawer-maxos.zip
         asset_content_type: application/octet-stream
