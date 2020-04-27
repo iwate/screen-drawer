@@ -28,8 +28,7 @@ jobs:
       run: |
         go get -v github.com/therecipe/qt/cmd/...
         go get -v github.com/gorilla/websocket
-        $(go env GOPATH)/bin/qtenv
         docker pull therecipe/qt:windows_64_static
 
     - name: Build
-      run: qtdeploy -docker build windows_64_static
+      run: $(go env GOPATH)/bin/qtdeploy -docker build windows_64_static
