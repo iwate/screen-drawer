@@ -76,7 +76,6 @@ jobs:
         QT_HOMEBREW: true
       run: |
         cd $GOPATH/src/github.com/${{ github.repository }}
-        xcode-select --install
         go get -v github.com/therecipe/qt/cmd/...
         $(go env GOPATH)/bin/qtsetup -test=false
         go get -v github.com/gorilla/websocket
