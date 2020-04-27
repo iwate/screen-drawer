@@ -92,7 +92,7 @@ jobs:
       run: |
         cd $GOPATH/src/github.com/${{ github.repository }}
         qtdeploy build desktop
-        zip -r ./deploy/darwin ${{ github.workspace }}/screen-drawer-maxos.zip
+        zip -r ${{ github.workspace }}/screen-drawer-maxos.zip ./deploy/
         ls ${{ github.workspace }}
     
     - name: Upload Release Asset
