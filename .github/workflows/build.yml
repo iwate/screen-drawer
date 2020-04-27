@@ -24,9 +24,9 @@ jobs:
 
     - name: Get dependencies
       run: |
-        sudo apt-get -y install build-essential libglu1-mesa-dev libpulse-dev libglib2.0-dev
-        export GO111MODULE=off; go get -v github.com/therecipe/qt/cmd/... && $(go env GOPATH)/bin/qtsetup -test=false
+        export GO111MODULE=off; go get -v github.com/therecipe/qt/cmd/...
         go get -v github.com/gorilla/websocket
+        docker pull therecipe/qt:windows_64_static
 
     - name: Build
-      run: qtdeploy build desktop
+      run: qtdeploy -docker build windows_64_static
