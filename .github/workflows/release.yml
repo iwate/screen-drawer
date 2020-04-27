@@ -1,10 +1,8 @@
 name: Go
 
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  release:
+    types: [created]
 
 jobs:
 
@@ -43,6 +41,16 @@ jobs:
       run: |
         cd $GOPATH/src/github.com/${{ github.repository }}
         $(go env GOPATH)/bin/qtdeploy -docker build windows_64_static
+    
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: $GOPATH/src/github.com/${{ github.repository }}/screen-drawer.exe
+        asset_name: screen-drawer.exe
+        asset_content_type: application/octet-stream
 
   mac:
     name: Build on macOS
@@ -85,3 +93,13 @@ jobs:
         cd $GOPATH/src/github.com/${{ github.repository }}
         qtdeploy build desktop
         ls
+    
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: $GOPATH/src/github.com/${{ github.repository }}/screen-drawer
+        asset_name: screen-drawer
+        asset_content_type: application/octet-stream
