@@ -84,4 +84,4 @@ jobs:
       run: |
         cd $GOPATH/src/github.com/${{ github.repository }}
         qtdeploy build desktop
-        ls
+        ls deploy/darwin
