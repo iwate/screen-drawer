@@ -23,9 +23,12 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Get dependencies
+      env:
+        GO111MODULE: off
       run: |
-        export GO111MODULE=off; go get -v github.com/therecipe/qt/cmd/...
+        go get -v github.com/therecipe/qt/cmd/...
         go get -v github.com/gorilla/websocket
+        $(go env GOPATH)/bin/qtenv
         docker pull therecipe/qt:windows_64_static
 
     - name: Build
