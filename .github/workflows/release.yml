@@ -100,6 +100,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ github.event.release.upload_url }}
-        asset_path: go/src/github.com/iwate/screen-drawer/deploy/darwin/screen-drawer.app
+        asset_path: ${{ env.GOPATH }}/src/github.com/${{ github.repository }}/deploy/darwin/screen-drawer.app
         asset_name: screen-drawer.app
         asset_content_type: application/octet-stream
