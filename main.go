@@ -11,6 +11,7 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"path/filepath"
 	"sync"
 	"time"
 
@@ -176,8 +177,12 @@ func exists(name string) bool {
 	return !os.IsNotExist(err)
 }
 
+var home, _ = os.UserHomeDir()
+var cert = filepath.Join(home, "sd_cert.cer")
+var key = filepath.Join(home, "sd_key.pem")
+
 func main() {
-	if !exists("cert.cer") || !exists("key.pem") {
+	if !exists(cert) || !exists(key) {
 		generateCert()
 	}
 	if len(os.Args) > 2 {
@@ -191,7 +196,7 @@ func main() {
 	h := screen.Height()
 	wf := float64(w)
 	hf := float64(h)
-	window := widgets.NewQMainWindow(nil, core.Qt__WindowStaysOnTopHint|core.Qt__FramelessWindowHint)
+	window := widgets.NewQMainWindow(nil, core.Qt__WindowStaysOnTopHint|core.Qt__FramelessWindowHint|core.Qt__WindowTransparentForInput)
 	window.SetMinimumSize2(w, h)
 	window.SetAttribute(core.Qt__WA_TranslucentBackground, true)
 	window.SetStyleSheet("background:transparent;")
@@ -250,7 +255,7 @@ func main() {
 			}
 		})
 
-		err := http.ListenAndServeTLS(":44190", "cert.cer", "key.pem", nil)
+		err := http.ListenAndServeTLS(":44190", cert, key, nil)
 		if err != nil {
 			log.Fatal("error starting http server::", err)
 			return
@@ -306,7 +311,7 @@ func generateCert() {
 		log.Fatalf("Failed to create certificate: %v", err)
 	}
 
-	certOut, err := os.Create("cert.cer")
+	certOut, err := os.Create(cert)
 	if err != nil {
 		log.Fatalf("Failed to open cert.cer for writing: %v", err)
 	}
@@ -318,7 +323,7 @@ func generateCert() {
 	}
 	log.Print("wrote cert.cer\n")
 
-	keyOut, err := os.OpenFile("key.pem", os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0600)
+	keyOut, err := os.OpenFile(key, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0600)
 	if err != nil {
 		log.Fatalf("Failed to open key.pem for writing: %v", err)
 		return

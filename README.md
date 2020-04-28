@@ -25,9 +25,9 @@ WebSocketサーバは意図的にオリジンチェックを外しています�
 ### Windows
 
 1. [Release](https://github.com/iwate/screen-drawer/releases) から最新版のexeをダウンロード
-2. ダウンロードしたexeを起動
-3. `cert.cer` ファイルと `key.pem` ファイルが作成されていることを確認
-4. `cert.cer` をダブルクリック
+2. ダウンロードしたscreen-drawer.exeを起動
+3. ホームディレクトリに`sd_cert.cer` ファイルと `sd_key.pem` ファイルが作成されていることを確認
+4. `sd_cert.cer` をダブルクリック
 5.  証明書をインストール
 6. 保存場所：ローカルコンピュータ で次へ
 7. 証明書をすべて次のストアへ配置する：信頼されたルート証明書 で次へ
@@ -35,4 +35,11 @@ WebSocketサーバは意図的にオリジンチェックを外しています�
 
 ### Mac
 
-Contribute募集中
+1. [Release](https://github.com/iwate/screen-drawer/releases) から最新版のmacOS用zipをダウンロード
+2. ダウンロードしたzipを展開し、screen-drawer.appを起動
+3. ホームディレクトリに`sd_cert.cer` ファイルと `sd_key.pem` ファイルが作成されていることを確認
+4. `sd_cert.cer` をダブルクリック
+5.  キーチェーン：ログイン で追加
+6. キーチェーンアクセスで追加された証明書を開く
+7. 信頼→SSLセレクションを常に信頼に変更し設定を保存
+8. 完了
