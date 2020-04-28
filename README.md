@@ -1,7 +1,7 @@
 # screen-drawer
 [Virtual Office](https://github.com/iwate/VirtualOfiice) と接続するスクリーンドロワーアプリケーションです。
 
-Virtual Officeでデスクトップ共有を開始して人のスクリーン上に他者が書きこめるようにします。
+Virtual Officeでデスクトップ共有を開始した人のスクリーン上に他者が書きこめるようにします。
 
 ## Features
 
